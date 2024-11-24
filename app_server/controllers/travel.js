@@ -1,21 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+var fs = require('fs');
+var trips =
+JSON.parse(fs.readFileSync('.data/trips.json','utf8'));
 
-let trips = [];
-try {
-    trips = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/trips.json'), 'utf8'));
-} catch (error) {
-    console.error('Error reading trips.json:', error);
-}
-
+/*GET Travel View*/
 const travel = (req, res) => {
-    res.render('travel', {
-        title: 'Travlr Getaways',
-        trips
-    });
+    res.render('travel', {title: 'Travlr Getaways'});
 };
 
 module.exports = {
     travel
 };
-
