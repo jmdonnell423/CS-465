@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TripListingComponent } from './trip-listing.component';
+import { EditTripComponent } from './edit-trip.component';
 
-describe('TripListingComponent', () => {
-  let component: TripListingComponent;
-  let fixture: ComponentFixture<TripListingComponent>;
+describe('EditTripComponent', () => {
+  let component: EditTripComponent;
+  let fixture: ComponentFixture<EditTripComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TripListingComponent]
+      imports: [EditTripComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TripListingComponent);
+    fixture = TestBed.createComponent(EditTripComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -20,4 +20,4 @@ describe('TripListingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-}); 
+});
