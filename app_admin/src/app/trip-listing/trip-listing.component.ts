@@ -13,11 +13,10 @@ import { Router } from '@angular/router';
   imports: [CommonModule, TripCardComponent],
   providers: [TripDataService], 
   templateUrl: './trip-listing.component.html',
-  styleUrl: './trip-listing.component.css'
-  
-
+  styleUrls: ['./trip-listing.component.css']
 })
 export class TripListingComponent implements OnInit {
+  // Component code remains unchanged
 
   trips: Array<any> = trips;
   //trips!: Trip[];

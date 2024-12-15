@@ -1,0 +1,11 @@
+<div class="container">
+    <div *ngIf="!isLoggedIn()" class="alert alert-info">
+      <h1>Welcome to Travlr Getaways</h1>
+      <p>Please login to continue.</p>
+    </div>
+    <div *ngIf="isLoggedIn()">
+      <h1>Welcome Back!</h1>
+      <p>You are logged in. Enjoy your stay!</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,15 @@
+.container {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  .alert {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    color: #007bff;
+  }
+  
