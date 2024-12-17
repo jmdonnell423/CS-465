@@ -3,7 +3,7 @@ import { AddTripComponent } from './add-trip/add-trip.component';
 import { EditTripComponent } from './edit-trip/edit-trip.component';
 import { TripListingComponent } from './trip-listing/trip-listing.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' }, // Default route

@@ -6,7 +6,8 @@
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<app-navbar></app-navbar> <!-- Ensure the correct selector for your navbar -->
+<router-outlet></router-outlet> <!-- Required for routing to work -->
 <div class="container mt-4">
   <app-trip-listing></app-trip-listing> <!-- Ensure this matches the selector -->
 </div>

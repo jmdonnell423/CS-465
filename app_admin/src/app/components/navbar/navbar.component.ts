@@ -1,34 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Import CommonModule
+import { RouterModule } from '@angular/router'; // Import RouterModule for routerLink
 
 @Component({
   selector: 'app-navbar',
+  standalone: true, // Mark as standalone
+  imports: [CommonModule, RouterModule], // Include CommonModule and RouterModule
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-  isLoggedIn: boolean = false;
-
-  constructor(
-    private authService: AuthenticationService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    // Subscribe to login state changes
-    this.authService.loggedIn$.subscribe((loggedIn) => {
-      console.log('Login state changed:', loggedIn); // Debug log
-      this.isLoggedIn = loggedIn; // Update UI dynamically
-    });
+export class NavbarComponent {
+  public isLoggedIn(): boolean {
+    // Example authentication logic (replace with your own service call)
+    const token = localStorage.getItem('travlr-token');
+    return !!token; // Returns true if token exists, otherwise false
   }
 
-  onLogout(): void {
-    console.log('Logout button clicked'); // Debug log
-    this.authService.logout(); // Call logout
-    this.router.navigate(['/login']); // Redirect to login page
+  public onLogout(): void {
+    localStorage.removeItem('travlr-token'); // Clear token on logout
+    window.location.reload(); // Optionally reload or navigate to login
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

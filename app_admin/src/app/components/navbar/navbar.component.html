@@ -1,17 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/">Travlr Getaways</a>
-    <div class="d-flex ms-auto">
-      <!-- Login Button -->
-      <button *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-primary">
-        Login
-      </button>
-  
-      <!-- Logout Button -->
-      <button *ngIf="isLoggedIn" (click)="onLogout()" class="btn btn-danger">
-        Log Off
-      </button>
+<nav class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand" href="#"><img src="/assets/images/logo.png" alt="Logo"></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/list-trips">Trips</a>
+      </div>
+    </div>
+    <div class="navbar-nav ml-auto">
+      <!-- Show "Log In" if user is not logged in -->
+      <a class="nav-item nav-link" routerLink="/login" *ngIf="!isLoggedIn()">Log In</a>
+      <!-- Show "Log Out" if user is logged in -->
+      <a class="nav-item nav-link" href="#" (click)="onLogout()" *ngIf="isLoggedIn()">Log Out</a>
     </div>
   </nav>
+  
+  
+  
   
   
   

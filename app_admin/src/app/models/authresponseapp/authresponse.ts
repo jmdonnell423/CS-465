@@ -1,5 +1,6 @@
 export class AuthResponse {
-    token: string = ''; // Default initialization
+    token!: string;
   }
+  
   
   

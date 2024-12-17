@@ -1,62 +1,50 @@
+const passport = require('passport');
 const mongoose = require('mongoose');
-const User = require('../models/user'); // Adjust path as necessary
+const User = mongoose.model('users');
 
-// Register function
-const register = async (req, res) => {
-    if (!req.body.name || !req.body.email || !req.body.password) {
-        return res.status(400).json({ "message": "All fields required" });
+const register = (req, res) => {
+  if (!req.body.name || !req.body.email || !req.body.password) {
+    return res.status(400).json({"message": "All fields required"});
+  }
+
+  const user = new User();
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.setPassword(req.body.password);
+
+  user.save((err) => {
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      const token = user.generateJwt();
+      res.status(200).json({token});
     }
-
-    try {
-        const user = new User();
-        user.name = req.body.name;
-        user.email = req.body.email;
-        user.setPassword(req.body.password);
-
-        // Save the user and handle the result
-        await user.save();
-        const token = user.generateJwt();
-        res.status(200).json({ token });
-    } catch (err) {
-        res.status(400).json(err);
-    }
+  });
 };
 
-// Login function
-const login = async (req, res) => {
-    if (!req.body.email || !req.body.password) {
-        return res.status(400).json({ "message": "All fields required" });
+const login = (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).json({"message": "All fields required"});
+  }
+
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.status(404).json(err);
     }
-
-    try {
-        console.log("Login request for email:", req.body.email); // Debug log
-        const user = await User.findOne({ email: req.body.email });
-        
-        if (!user) {
-            console.log("User not found for email:", req.body.email); // Debug log
-            return res.status(401).json({ "message": "Invalid email or password" });
-        }
-
-        const isPasswordValid = user.validPassword(req.body.password);
-        console.log("Password valid:", isPasswordValid); // Debug log
-
-        if (!isPasswordValid) {
-            return res.status(401).json({ "message": "Invalid email or password" });
-        }
-
-        const token = user.generateJwt();
-        await user.save(); // Save the token in the database
-        console.log("Generated token:", token); // Debug log
-
-        res.status(200).json({ token });
-    } catch (err) {
-        console.error("Login error:", err); // Debug log
-        res.status(500).json({ "message": "An error occurred during login", "error": err.message });
+    if (user) {
+      const token = user.generateJwt();
+      res.status(200).json({token});
+    } else {
+      res.status(401).json(info);
     }
+  })(req, res);
 };
 
 module.exports = {
-    register,
-    login
+  register,
+  login
 };
+
+
+
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trips } from '../data/trips';
 import { TripCardComponent } from '../trip-card/trip-card.component';
-
+import { AuthenticationService } from '../services/authentication.service';
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ export class TripListingComponent implements OnInit {
   message: string = '';
 
   constructor(
+    private authenticationService: AuthenticationService,
     private tripDataService: TripDataService,
     private router:Router)
     { 
@@ -31,6 +32,10 @@ export class TripListingComponent implements OnInit {
 
   public addTrip(): void {
     this.router.navigate(['add-trip'])
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
   }
 
   private getStuff(): void {  
